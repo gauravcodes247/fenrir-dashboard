@@ -45,21 +45,21 @@ const SideBar = ({ dark }) => {
         <nav className="space-y-2">
 
 
-          <NavLink to="/" className={({ isActive }) => getNavClass(isActive)}>
+          <NavLink to="/dashboard" end className={({ isActive }) => getNavClass(isActive)}>
            <DashboardCustomizeIcon className="mr-3" /> Dashboard
           </NavLink>
 
-          <NavLink to="/projects" className={({ isActive }) => getNavClass(isActive)}>
+          <NavLink to="/dashboard/projects" className={({ isActive }) => getNavClass(isActive)}>
            <ContentPasteIcon className="mr-3" /> Projects
           </NavLink>
 <div className="relative">
-          <NavLink to="/scans" className={({ isActive }) => getNavClass(isActive)}>
+          <NavLink to="/dashboard/scans" className={({ isActive }) => getNavClass(isActive)}>
           <span className="absolute rounded-[50%] h-1.75 w-1.75 bg-red-500 bottom-[8px]"></span>
           <FindInPageIcon className="mr-3" />  Scans
           </NavLink>
 </div>
 
-          <NavLink to="/schedule" className={({ isActive }) => getNavClass(isActive)}>
+          <NavLink to="/dashboard/schedule" className={({ isActive }) => getNavClass(isActive)}>
              <CalendarTodayIcon className="mr-3" /> Schedule
           </NavLink>
 
@@ -69,17 +69,17 @@ const SideBar = ({ dark }) => {
         <nav className="space-y-2 pt-6 border-t border-gray-100">
 
 <div className="relative">
-          <NavLink to="/notifications" className={({ isActive }) => getNavClass(isActive)}>
+          <NavLink to="/dashboard/notifications" className={({ isActive }) => getNavClass(isActive)}>
           <span className="absolute rounded-[50%] h-1.75 w-1.75 bg-red-500 bottom-[9px] left-4"></span>
           <NotificationsActiveIcon className="mr-3" />  Notifications
           </NavLink>
 </div>
 
-          <NavLink to="/settings" className={({ isActive }) => getNavClass(isActive)}>
+          <NavLink to="/dashboard/settings" className={({ isActive }) => getNavClass(isActive)}>
          <SettingsIcon className="mr-3" />   Settings
           </NavLink>
 
-          <NavLink to="/support" className={({ isActive }) => getNavClass(isActive)}>
+          <NavLink to="/dashboard/support" className={({ isActive }) => getNavClass(isActive)}>
        <InfoIcon className="mr-3" />     Support
           </NavLink>
 

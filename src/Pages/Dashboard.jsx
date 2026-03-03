@@ -2,7 +2,7 @@ import React from "react";
 import SeverityCard from "../components/SeverityCard";
 import ScanDetails from "../components/ScanDetails";
 import ScanTable from "../components/ScanTable";
-const Dashboard = () => {
+const Dashboard = ({dark}) => {
   const scanData = [
     {
       org: "Project X",
@@ -22,6 +22,7 @@ const Dashboard = () => {
       color: "bg-red-500",
       noofseverity: 86,
       change: "+2% increase than yesterday",
+      tcolor: "bg-red-500"
     },
     {
       id: 2,
@@ -29,6 +30,7 @@ const Dashboard = () => {
       color: "bg-yellow-500",
       noofseverity: 8,
       change: "+0.9% increase than yesterday",
+      tcolor: "bg-red-500"
     },
     {
       id: 3,
@@ -36,6 +38,7 @@ const Dashboard = () => {
       color: "bg-green-500",
       noofseverity: 5,
       change: "+0.9% decrease than yesterday",
+      tcolor: "bg-green-500"
     },
     {
       id: 4,
@@ -43,25 +46,32 @@ const Dashboard = () => {
       color: "bg-blue-500",
       noofseverity: 3,
       change: "+0.9% increase than yesterday",
+      tcolor: "bg-red-500"
     },
   ];
 
   return (
     <div className="p-1">
-    <div className="bg-white shadow-sm p-6 space-y-8">
+    <div
+  className={`p-6 space-y-8 rounded-xl border ${
+    dark
+      ? "bg-[#1A1A1A] border-gray-800"
+      : "bg-white border-gray-200"
+  }`}
+>
 
-      <ScanDetails {...scanData[0]} />
+      <ScanDetails {...scanData[0]} dark={dark} />
 
       {/* Cards Section */}
       <div className="grid grid-cols-4 gap-4 max-w-6xl">
         {severityData.map((item) => (
-          <SeverityCard key={item.id} {...item} />
+          <SeverityCard key={item.id} {...item} dark={dark} tcolor={item.tcolor} />
         ))}
       </div>
 
         {/* Table Section */}
       <div className="w-full">
-        <ScanTable />
+        <ScanTable dark={dark}/>
       </div>
 
     </div>

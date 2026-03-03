@@ -6,7 +6,7 @@ import LoginPage from './Pages/LoginPage'
 const App = () => {
   return (
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={<LoginPage />} />
       <Route path="/dashboard/*" element={<AppLayout />} />
       
     </Routes>

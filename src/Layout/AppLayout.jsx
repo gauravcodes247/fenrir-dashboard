@@ -4,11 +4,20 @@ import { Routes, Route } from "react-router-dom";
 import Dashboard from "../Pages/Dashboard";
 import Navbar from "../components/Navbar";
 import Scans from "../Pages/Scans";
+import Projects from "../Pages/Projects";
+import Schedule from "../Pages/Schedule";
+import Notifications from "../Pages/Notifications";
+import Settings from "../Pages/Settings";
+import Support from "../Pages/Support";
+
 const AppLayout = () => {
   const [dark, setDark] = useState(false);
 
   return (
     <div
+ 
+
+
   className={`h-screen flex  ${
     dark
       ? "bg-[#121212] text-gray-200"
@@ -36,8 +45,13 @@ const AppLayout = () => {
     {/* Scrollable content */}
     <div className="flex-1 overflow-y-auto p-3">
       <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/scans" element={<Scans />} />
+        <Route index element={<Dashboard dark={dark} />} />
+        <Route path="scans" element={<Scans dark={dark} />} />
+        <Route path="projects" element={<Projects dark={dark} />} />
+        <Route path="schedule" element={<Schedule dark={dark} />} />
+        <Route path="notifications" element={<Notifications dark={dark} />} />
+        <Route path="settings" element={<Settings dark={dark} />} />
+        <Route path="support" element={<Support />} />
       </Routes>
     </div>
 

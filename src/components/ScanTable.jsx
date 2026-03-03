@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { TextField, Box } from "@mui/material";
 
 const columns = [
-  { field: "scanName", headerName: "Scan Name", flex: 1.5 },
+  { field: "scanName", headerName: "Scan Name", flex: 1.5},
   { field: "type", headerName: "Type", flex: 1 },
   { field: "status", headerName: "Status", flex: 1 },
   {
@@ -14,7 +14,7 @@ const columns = [
     <div className="w-full flex items-center gap-2">
       <div className="w-full bg-gray-200 h-2 rounded">
         <div
-          className="bg-blue-500 h-2 rounded"
+          className="bg-[#0CC8A8] h-2 rounded"
           style={{ width: `${params.value}%` }}
         />
       </div>
@@ -23,15 +23,20 @@ const columns = [
   ),
 },
   {
-    field: "vulnerability",
-    headerName: "Vulnerability",
-    flex: 1.5,
-    renderCell: (params) => {
-      const v = params.row.vulnerability;
+  field: "vulnerability",
+  headerName: "Vulnerability",
+  width: 180,                 
+  align: "center",
+  headerAlign: "center",
+  sortable: false,
 
-      return (
-        <div className="flex gap-2">
-          <div className="w-6 h-6 flex items-center justify-center text-xs bg-red-500 text-white rounded-sm">
+  renderCell: (params) => {
+    const v = params.row.vulnerability;
+
+    return (
+      <div className="w-full flex justify-center">
+        <div className="flex gap-2 items-center justify-center">
+          <div className="w-6 h-6 flex items-center justify-center text-xs bg-red-500 text-white rounded-md">
             {v.critical}
           </div>
           <div className="w-6 h-6 flex items-center justify-center text-xs bg-orange-500 text-white rounded-sm">
@@ -44,9 +49,10 @@ const columns = [
             {v.low}
           </div>
         </div>
-      );
-    },
+      </div>
+    );
   },
+},
   { field: "lastScan", headerName: "Last Scan", flex: 1 },
 ];
 
@@ -143,7 +149,7 @@ const rows = [
   },
 ];
 
-const ScanTable = () => {
+const ScanTable = ({ dark }) => {
   const [search, setSearch] = useState("");
 
   const filteredRows = rows.filter((row) =>
@@ -151,26 +157,102 @@ const ScanTable = () => {
   );
 
   return (
-    <Box sx={{ width: "100%", backgroundColor: "white", p: 2, borderRadius: 2 }}>
+    <Box
+  sx={{
+    width: "100%",
+    p: 2,
+    borderRadius: 2,
+    backgroundColor: dark ? "#1A1A1A" : "#ffffff",
+    border: dark ? "1px solid #374151" : "1px solid #e5e7eb",
+  }}
+>
       
       {/* Search */}
-      <TextField
-        label="Search Scan"
-        variant="outlined"
-        size="small"
-        fullWidth
-        sx={{ mb: 2 }}
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <div className="flex items-center gap-3 mb-2">
+
+  <TextField
+    label="Search Scan"
+    variant="outlined"
+    size="small"
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+    sx={{
+      flex: 1,   // 🔥 this makes it grow but not 100%
+      input: {
+        color: dark ? "#e5e7eb" : "#111827",
+      },
+      label: {
+        color: dark ? "#9ca3af" : "#6b7280",
+      },
+      "& .MuiOutlinedInput-root": {
+        backgroundColor: dark ? "#1F1F1F" : "#ffffff",
+        "& fieldset": {
+          borderColor: dark ? "#4b5563" : "#d1d5db",
+        },
+      },
+    }}
+  />
+
+  <button className="px-4 py-2 rounded-lg bg-[#0CC8A8] text-white text-sm">
+    Filter
+  </button>
+  <button className="px-4 py-2 rounded-lg bg-[#0CC8A8] text-white text-sm">
+    Column
+  </button>
+  <button className="px-4 py-2 rounded-lg bg-[#0CC8A8] text-white text-sm">
+    New Scan
+  </button>
+
+</div>
 
       {/* DataGrid */}
       <DataGrid
-        rows={filteredRows}
-        columns={columns}
-        autoHeight
-        pageSizeOptions={[5, 10]}
-      />
+  rows={filteredRows}
+  columns={columns}
+  autoHeight
+  pageSizeOptions={[5, 10]}
+  disableRowSelectionOnClick
+  sx={{
+    border: "none",
+    backgroundColor: dark ? "#1A1A1A" : "#ffffff",
+    color: dark ? "#e5e7eb" : "#111827",
+
+    // 🔥 FIX HEADER BACKGROUND
+    "& .MuiDataGrid-columnHeaders": {
+      backgroundColor: dark ? "#1F1F1F !important" : "#f9fafb",
+      borderBottom: dark ? "1px solid #2a2a2a" : "1px solid #e5e7eb",
+    },
+
+    "& .MuiDataGrid-columnHeader": {
+      backgroundColor: dark ? "#1F1F1F !important" : "#f9fafb",
+    },
+
+    "& .MuiDataGrid-columnHeaderTitle": {
+      color: dark ? "#9ca3af" : "#6b7280",
+      fontWeight: 500,
+    },
+
+    "& .MuiDataGrid-cell": {
+      borderColor: dark ? "#2a2a2a" : "#e5e7eb",
+    },
+
+    "& .MuiDataGrid-row:hover": {
+      backgroundColor: dark ? "#232323" : "#f3f4f6",
+    },
+
+    "& .Mui-selected": {
+      backgroundColor: dark ? "#2a2a2a !important" : "#e5e7eb !important",
+    },
+
+    "& .Mui-selected:hover": {
+      backgroundColor: dark ? "#333333 !important" : "#d1d5db !important",
+    },
+
+    "& .MuiDataGrid-footerContainer": {
+      backgroundColor: dark ? "#1F1F1F !important" : "#ffffff",
+    },
+  }}
+/>
     </Box>
   );
 };
